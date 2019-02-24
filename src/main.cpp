@@ -37,6 +37,8 @@ int main() {
 
 			window.display();
 		}
+
+		// play tone if timer > 1
     }
     return 0;
 }
