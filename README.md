@@ -1,12 +1,16 @@
 ﻿# Chasm
 
-blah
+Chasm is a CHIP-8 virtual machine emulator written in C++. CHIP-8 is an interpreted programming language developed in the mid-1970s targetting the Telmac 1800 and COSMAC VIP 8-bit microcomputers to ease development of video games on these machines.
 
-## Screenshots
+## Screenshot
 
-blah
+![Screenshot](https://user-images.githubusercontent.com/3271352/53309418-073d3f80-387e-11e9-9ed1-94935c0448ed.png)
 
 ## How to Compile
+
+blah
+
+## How to Run
 
 blah
 
@@ -26,13 +30,13 @@ blah
 
 ### Input
 
-blah
+The microcomputers that ran CHIP-8 generally had a 16-key numeric pad. For ease of convenience with modern devices, I have translated the key to fit a QWERTY (sorry, France) layout.
 
      ┌───┬───┬───┬───┐             ┌───┬───┬───┬───┐
      │ 1 │ 2 │ 3 │ 4 │             │ 1 │ 2 │ 3 │ C │
      └─┬─┴─┬─┴─┬─┴─┬─┴─┐           │───┼───┼───┼───┤
        │ Q │ W │ E │ R │           │ 4 │ 5 │ 6 │ D │
-       └─┬─┴─┬─┴─┬─┴─┬─┴─┐   -->   │───┼───┼───┼───┤
+       └─┬─┴─┬─┴─┬─┴─┬─┴─┐   <--   │───┼───┼───┼───┤
          │ A │ S │ D │ F │         │ 7 │ 8 │ 9 │ E │
          └─┬─┴─┬─┴─┬─┴─┬─┴─┐       │───┼───┼───┼───┤
            │ Z │ X │ C │ V │       │ A │ 0 │ B | F |
