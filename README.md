@@ -1,32 +1,70 @@
 ﻿# Chasm
 
-Chasm is a CHIP-8 virtual machine emulator written in C++. CHIP-8 is an interpreted programming language developed in the mid-1970s targetting the Telmac 1800 and COSMAC VIP 8-bit microcomputers to ease development of video games on these machines.
+Chasm is a CHIP-8 virtual machine emulator written in C++. CHIP-8 is an interpreted programming language developed in the mid-1970s targetting the Telmac 1800 and COSMAC VIP microcomputers to ease development of 8-bit video games.
 
 ## Screenshot
 
-![Screenshot](https://user-images.githubusercontent.com/3271352/53309418-073d3f80-387e-11e9-9ed1-94935c0448ed.png)
+![Screenshot](https://user-images.githubusercontent.com/3271352/53309730-dd851800-387f-11e9-9b5a-f25014c580db.png)
 
 ## How to Compile
 
-blah
+@todo
 
 ## How to Run
 
-blah
+@todo
 
 ## Specifications
 
 ### Memory
 
-blah
+The CHIP-8 implementation can access up to 4KiB (4,096 bytes) of RAM. Originally, the interpreter was located within locations 0x000 0x1FF. Nowadays, that section can be used to store sprites and character sets.
+
+    +----------------+= 0xFFF (4095) End of Chip-8 RAM
+    |                |
+    |                |
+    |                |
+    |                |
+    |                |
+    | 0x200 to 0xFFF |
+    |     Chip-8     |
+    | Program / Data |
+    |     Space      |
+    |                |
+    |                |
+    |                |
+    +- - - - - - - - += 0x600 (1536) Start of ETI 660 Chip-8 programs
+    |                |
+    |                |
+    |                |
+    +----------------+= 0x200 (512) Start of most Chip-8 programs
+    | 0x000 to 0x1FF |
+    |  Reserved for  |
+    |  interpreter   |
+    +----------------+= 0x000 (0) Start of Chip-8 RAM
 
 ### Registers
 
-blah
+There are a handful of registers made available through the CHIP-8 specification:
+
+- 16 multi-purpose 8-bit registers, V0 through VF;
+- A 16-bit register used to store addresses, I;
+- Two 8-bit registers used for timing (see section on Timers);
+- A 16-bit program counter (PC);
+- An 8-bit stack pointer (SP);
+- A 16 16-bit value stack used for subroutines;
+
+Note: the VF register is used by some instructions to store state flags.
 
 ### Display
 
-blah
+The original implementation of CHIP-8 uses a 64x32 monochrome display:
+
+    ┌───────────────────┐
+    │ (0,0)      (63,0) │
+    │                   │
+    │ (0,31)    (63,31) │
+    └───────────────────┘
 
 ### Input
 
