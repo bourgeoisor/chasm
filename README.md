@@ -8,11 +8,13 @@ Chasm is a CHIP-8 virtual machine emulator written in C++. CHIP-8 is an interpre
 
 ## How to Compile
 
-@todo
+This project has been written in a platform-agnostic structure through [CMake](https://cmake.org/). Most C++ IDE's such as Microsoft Visual Studio and JetBrains CLion supports CMake projects natively. If you are to compile this project outside of an IDE, the `cmake` command can generate a Makefile that you can then run using `make`.
+
+I have used the [SFML v2.5.1](https://www.sfml-dev.org/download/sfml/2.5.1/) library to handle cross-platform windowing, graphics, and sounds. Note that you will need to have this library installed on your platform and edit `CMakeList.txt` to include its path.
 
 ## How to Run
 
-@todo
+Once the application is running, it will prompt you for the path of a program to load. Simply input an absolute or relative path to a valid CHIP-8 ROM. I have included a variety of public domain CHIP-8 ROMs in the `roms/` directory available in this repository.
 
 ## Specifications
 
