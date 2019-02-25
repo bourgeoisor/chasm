@@ -1,8 +1,10 @@
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include <fstream>
 #include <iostream>
+#include "sound.h"
 #include "emulator.h"
+
+std::vector<unsigned char> loadRom(std::string path);
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(768, 384), "Chasm");
@@ -14,47 +16,18 @@ int main() {
 	pixel.setFillColor(sf::Color(25, 100, 150));
 
 	Input input;
+	Sound sound;
 
 	Emulator emu(input);
 	emu.reset();
 
-	const unsigned SAMPLES = 44100;
-	const unsigned SAMPLE_RATE = 44100;
-	const unsigned AMPLITUDE = 30000;
+	std::string path;
+	std::cout << "Welcome to Chasm, a CHIP-8 emulator!" << std::endl;
+	std::cout << "ROM to open: ";
+	std::cin >> path;
 
-	sf::Int16 raw[SAMPLES];
-
-	const double TWO_PI = 6.28318;
-	const double increment = 440. / 44100;
-	double x = 0;
-	for (unsigned i = 0; i < SAMPLES; i++) {
-		raw[i] = AMPLITUDE * sin(x*TWO_PI);
-		x += increment;
-	}
-
-	sf::SoundBuffer Buffer;
-	Buffer.loadFromSamples(raw, SAMPLES, 1, SAMPLE_RATE);
-
-	sf::Sound Sound;
-	Sound.setBuffer(Buffer);
-	Sound.setLoop(true);
-
-
-	std::string filePath = "roms/PONG2";
-	std::ifstream file(filePath, std::ios::binary);
-	if (file.fail()) {
-		perror(filePath.c_str());
-	}
-	file.seekg(0, std::ios::end);
-	long fileSize = file.tellg();
-	file.seekg(0, std::ios::beg);
-	fileSize -= file.tellg();
-	std::vector<unsigned char> buffer(fileSize);
-	file.read((char *)&(buffer[0]), fileSize);
-	file.close();
-
+	std::vector<unsigned char> buffer = loadRom(path);
 	emu.load(buffer);
-
 
     while (window.isOpen()) {
         sf::Event event{};
@@ -82,9 +55,29 @@ int main() {
 		}
 
 		if (emu.getSoundTimer() > 0)
-			Sound.play();
+			sound.play();
 		else
-			Sound.stop();
+			sound.stop();
     }
     return 0;
+}
+
+std::vector<unsigned char> loadRom(std::string path) {
+	std::ifstream file(path, std::ios::binary);
+	if (file.fail()) {
+		perror(path.c_str());
+	}
+
+	file.seekg(0, std::ios::end);
+	long fileSize = file.tellg();
+
+	file.seekg(0, std::ios::beg);
+	fileSize -= file.tellg();
+
+	std::vector<unsigned char> buffer(fileSize);
+
+	file.read((char *)&(buffer[0]), fileSize);
+	file.close();
+
+	return buffer;
 }
